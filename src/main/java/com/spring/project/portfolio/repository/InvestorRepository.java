@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository(value = "investorRepository")
 public interface InvestorRepository extends JpaRepository<Investor, Integer>{
+   
     @Query(value = "Select i From Investor i Where i.isPassed='true' And i.username=?1")
     public Investor getInvestor(@Param("username") String username);
     
@@ -20,6 +21,19 @@ public interface InvestorRepository extends JpaRepository<Investor, Integer>{
     
     @Transactional
     @Modifying
-    @Query(value = "UPDATE Investor SET username=?2, password=?3, email=?4, balance=?5 WHERE id=?1", nativeQuery = true)
-    public void update(@Param("id") Integer id, @Param("username") String username, @Param("password") String password, @Param("email") String email, @Param("balance") Integer balance);
+    @Query(value = 
+            "UPDATE Investor "
+                    + "SET username=?2, "
+                    + "password=?3, "
+                    + "email=?4, "
+                    + "balance=?5 "
+                    + "WHERE id=?1", 
+            nativeQuery = true)
+    
+    public void update(
+            @Param("id") Integer id, 
+            @Param("username") String username, 
+            @Param("password") String password, 
+            @Param("email") String email, 
+            @Param("balance") Integer balance);
 }

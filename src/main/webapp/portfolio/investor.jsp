@@ -7,10 +7,12 @@
 
         <script>
             $(document).ready(function () {
+               
                 $("#myTable").on("click", "tr", function () {
-                    var id = $(this).find('td').eq(0).text().trim();
+                    var id = $(this).find('td').eq(0).text().trim(); // 找出 tr 裡面的 td, 第一個 td 元素, 也就是 id
                     //console.log(id);
-                    $.get("${pageContext.request.contextPath}/mvc/portfolio/investor/" + id, function (data, status) {
+                    $.get("${pageContext.request.contextPath}/app/portfolio/investor/" + id, function (data, status) {
+                        // 從路徑取回資料存進 data
                         console.log(JSON.stringify(data));
                         $("#myform").find("#id").val(data.id);
                         $("#myform").find("#username").val(data.username);
@@ -19,11 +21,12 @@
                         $("#myform").find("#balance").val(data.balance);
                     });
                 });
+                
                 $("#add").on("click", function () {
-                    var jsonObj = $('#myform').serializeObject();
-                    var jsonStr = JSON.stringify(jsonObj);
-                    $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/investor/",
+                    var jsonObj = $('#myform').serializeObject();   // 將表單序列化成物件
+                    var jsonStr = JSON.stringify(jsonObj);          // 將物件 stringify 成 JSON 格式
+                    $.ajax({ // 將資料傳至路徑 - InvestorController
+                        url: "${pageContext.request.contextPath}/app/portfolio/investor/",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
                         data: jsonStr,
@@ -36,11 +39,12 @@
                         }
                     });
                 });
+                
                 $("#upt").on("click", function () {
                     var jsonObj = $('#myform').serializeObject();
                     var jsonStr = JSON.stringify(jsonObj);
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/investor/" + jsonObj.id,
+                        url: "${pageContext.request.contextPath}/app/portfolio/investor/" + jsonObj.id,
                         type: "PUT",
                         contentType: "application/json; charset=utf-8",
                         data: jsonStr,
@@ -52,10 +56,11 @@
                         }
                     });
                 });
+                
                 $("#del").on("click", function () {
                     var id = $("#myform").find("#id").val();
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/investor/" + id,
+                        url: "${pageContext.request.contextPath}/app/portfolio/investor/" + id,
                         type: "DELETE",
                         async: true,
                         cache: false,
@@ -71,10 +76,10 @@
             });
 
             function table_list() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/investor/", function (datas, status) {
+                $.get("${pageContext.request.contextPath}/app/portfolio/investor/", function (datas, status) {
                     console.log("Datas: " + datas);
-                    $("#myTable tbody > tr").remove();
-                    $.each(datas, function (i, item) {
+                    $("#myTable tbody > tr").remove(); // 將之前的資料清空
+                    $.each(datas, function (i, item) {  // 將 datas 取出格式化成表格欄位
                         var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>';
                         $('#myTable').append(String.format(html,
                                 item.id,
@@ -83,11 +88,13 @@
                                 item.email,
                                 item.balance,
                                 item.code,
-                                item.pass
+                                item.isPassed
                                 ));
                     });
                 });
             }
+            
+            
         </script>
     </head>
     <body>
@@ -150,7 +157,7 @@
                         </div>    
                     </td>
                 </table>
-
+                
 
             </div>
         </div>

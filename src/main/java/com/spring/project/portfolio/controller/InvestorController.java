@@ -6,9 +6,13 @@ import com.spring.project.portfolio.service.EmailService;
 import com.spring.project.portfolio.service.PortfolioService;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,9 +34,16 @@ public class InvestorController {
         return portfolioService.getInvestorRepository().findAll();
     }
     
-    // 註冊帳號 新增 investor
+    // 查詢單筆 investor, 根據 id
+    @GetMapping(value = {"/{id}"})
+    public Investor queryForInvestor(@PathVariable("id") Optional<Integer> id){
+        return portfolioService.getInvestorRepository().findOne(id.get());
+    }
+ 
+    
+    // 新增 investor - 註冊帳號 
     @PostMapping(value = {"/", "/add"})
-    public Investor add(@RequestBody Map<String, String> jsonMap) {
+    public Investor addInvestor(@RequestBody Map<String, String> jsonMap) {
         Investor investor = new Investor();
         investor.setUsername(jsonMap.get("username"));
         investor.setPassword(jsonMap.get("password"));
@@ -53,5 +64,28 @@ public class InvestorController {
         emailService.send(investor);
         
         return investor;
+    }
+    
+    // 修改單筆(根據 id)
+    @PutMapping(value = {"/{id}"})
+    @Transactional
+    public Boolean update(@PathVariable("id") Optional<Integer> id, 
+                          @RequestBody Map<String, String> jsonMap) {
+        // 判斷是否有此 id?
+        if(!id.isPresent()) {
+            return false;
+        }
+        // 判斷該筆資料是否存在 ?
+        if(queryForInvestor(id) == null) {
+            return false;
+        }
+        // 修改資料
+        portfolioService.getInvestorRepository().update(
+                id.get(), 
+                jsonMap.get("username"), 
+                jsonMap.get("password"), 
+                jsonMap.get("email"), 
+                Integer.parseInt(jsonMap.get("balance")));
+        return true;
     }
 }
