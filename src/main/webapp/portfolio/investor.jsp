@@ -52,6 +52,7 @@
                         cache: false,
                         processData: false,
                         success: function (resposeJsonObject) {
+                            console.log(resposeJsonObject);
                             table_list();
                         }
                     });
@@ -66,6 +67,7 @@
                         cache: false,
                         processData: false,
                         success: function (resposeJsonObject) {
+                            console.log(resposeJsonObject);
                             table_list();
                         }
                     });

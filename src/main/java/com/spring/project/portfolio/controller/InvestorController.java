@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,7 +70,7 @@ public class InvestorController {
     // 修改單筆(根據 id)
     @PutMapping(value = {"/{id}"})
     @Transactional
-    public Boolean update(@PathVariable("id") Optional<Integer> id, 
+    public Boolean updateInvestor(@PathVariable("id") Optional<Integer> id, 
                           @RequestBody Map<String, String> jsonMap) {
         // 判斷是否有此 id?
         if(!id.isPresent()) {
@@ -86,6 +87,25 @@ public class InvestorController {
                 jsonMap.get("password"), 
                 jsonMap.get("email"), 
                 Integer.parseInt(jsonMap.get("balance")));
+        return true;
+    }
+    
+    // 單筆刪除(根據 id)
+    @DeleteMapping(value = {"/{id}"})
+    @Transactional
+    public Boolean deleteInvestor(@PathVariable("id") Optional<Integer> id) {
+        
+        // 判斷是否有此 id?
+        if(!id.isPresent()) {
+            return false;
+        }
+        // 判斷該筆資料是否存在 ?
+        if(queryForInvestor(id) == null) {
+            return false;
+        }
+        
+        // 刪除資料
+        portfolioService.getInvestorRepository().delete(id.get());
         return true;
     }
 }
