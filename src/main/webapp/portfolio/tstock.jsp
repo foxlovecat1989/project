@@ -10,7 +10,7 @@
                 $("#myTable").on("click", "tr", function () {
                     var id = $(this).find('td').eq(0).text().trim();
                     //console.log(id);
-                    $.get("${pageContext.request.contextPath}/mvc/portfolio/tstock/" + id, function (data, status) {
+                    $.get("${pageContext.request.contextPath}/app/portfolio/tstock/" + id, function (data, status) {
                         console.log(JSON.stringify(data));
                         $("#myform").find("#id").val(data.id);
                         $("#myform").find("#name").val(data.name);
@@ -22,7 +22,7 @@
                     var jsonObj = $('#myform').serializeObject();
                     var jsonStr = JSON.stringify(jsonObj);
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/tstock/",
+                        url: "${pageContext.request.contextPath}/app/portfolio/tstock/",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
                         data: jsonStr, //Stringified Json Object
@@ -39,7 +39,7 @@
                     var jsonObj = $('#myform').serializeObject();
                     var jsonStr = JSON.stringify(jsonObj);
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/tstock/",
+                        url: "${pageContext.request.contextPath}/app/portfolio/tstock/",
                         type: "PUT",
                         contentType: "application/json; charset=utf-8",
                         data: jsonStr, //Stringified Json Object
@@ -52,21 +52,23 @@
                         }
                     });
                 });
-                $("#del").on("click", function () {
+                
+                 $("#del").on("click", function () {
                     var id = $("#myform").find("#id").val();
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/tstock/" + id,
+                        url: "${pageContext.request.contextPath}/app/portfolio/tstock/" + id,
                         type: "DELETE",
-                        async: false, //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
-                        cache: false, //This will force requested pages not to be cached by the browser  
-                        processData: false, //To avoid making query String instead of JSON
+                        async: true,
+                        cache: false,
+                        processData: false,
                         success: function (resposeJsonObject) {
-                            //alert(resposeJsonObject);
+                            console.log(resposeJsonObject);
+                            alert(JSON.stringify(resposeJsonObject));
                             table_list();
                         }
                     });
                 });
-                
+
                 // Classify 下拉選單
                 classify_list();
                 
@@ -75,7 +77,7 @@
             });
 
             function classify_list() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/classify/", function (datas, status) {
+                $.get("${pageContext.request.contextPath}/app/portfolio/classify/", function (datas, status) {
                     console.log("Datas: " + datas);
                     datas.map(function (data) {
                         $('#classify_id').append('<option value="' + data.id + '">' + data.name + '</option>');
@@ -84,7 +86,7 @@
             }
 
             function table_list() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/tstock/", function (datas, status) {
+                $.get("${pageContext.request.contextPath}/app/portfolio/tstock/", function (datas, status) {
                     console.log("Datas: " + datas);
                     $("#myTable tbody > tr").remove();
                     $.each(datas, function (i, item) {

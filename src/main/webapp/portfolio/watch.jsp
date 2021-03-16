@@ -13,7 +13,7 @@
                     var jsonObj = $('#myform').serializeObject();
                     var jsonStr = JSON.stringify(jsonObj);
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/watch/" + watch_id,
+                        url: "${pageContext.request.contextPath}/app/portfolio/watch/" + watch_id,
                         type: "PUT",
                         contentType: "application/json; charset=utf-8",
                         data: jsonStr,
@@ -30,7 +30,7 @@
                     var tstock_id = $(this).attr('tstock_id');
                     if (confirm("是否要刪除？" + tstock_id)) {
                         $.ajax({
-                            url: "${pageContext.request.contextPath}/mvc/portfolio/watch/" + watch_id + "/remove/" + tstock_id,
+                            url: "${pageContext.request.contextPath}/app/portfolio/watch/" + watch_id + "/remove/" + tstock_id,
                             type: "DELETE",
                             async: true,
                             cache: false,
@@ -57,7 +57,7 @@
                     }
                     if (flag && confirm("是否要增加？")) {
                         $.ajax({
-                            url: "${pageContext.request.contextPath}/mvc/portfolio/watch/" + watch_id + "/add/" + tstock_id,
+                            url: "${pageContext.request.contextPath}/app/portfolio/watch/" + watch_id + "/add/" + tstock_id,
                             type: "GET",
                             async: true,
                             cache: false,
@@ -78,7 +78,7 @@
             // 1. 透過 watch_id 找到 watch
             // 2. 再透過 watch.tStocks 取得觀察股(tstock)資料
             function table_list1() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/watch/" + watch_id, function (data, status) {
+                $.get("${pageContext.request.contextPath}/app/portfolio/watch/" + watch_id, function (data, status) {
                     console.log(JSON.stringify(data));
                     $("#myform").find("#id").val(data.id);
                     $("#myform").find("#name").val(data.name);
@@ -102,7 +102,7 @@
             
             // 取得所有 tstock 列表資料
             function table_list2() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/tstock/", function (datas, status) {
+                $.get("${pageContext.request.contextPath}/app/portfolio/tstock/", function (datas, status) {
                     console.log(JSON.stringify(datas));
                     $("#myTable2 tbody > tr").remove();
                     $.each(datas, function (i, item) {

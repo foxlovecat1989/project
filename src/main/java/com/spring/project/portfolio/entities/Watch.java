@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Watch implements Serializable {
-    
+
     @Id
     @GeneratedValue
     private Integer id;

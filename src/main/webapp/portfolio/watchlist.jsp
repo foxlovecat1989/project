@@ -26,7 +26,7 @@
                             return;
                         }
                         $.ajax({
-                            url: "${pageContext.request.contextPath}/mvc/portfolio/order/buy/" + tstock_id + "/" + amount,
+                            url: "${pageContext.request.contextPath}/app/portfolio/order/buy/" + tstock_id + "/" + amount,
                             type: "GET",
                             async: true, 
                             cache: false,  
@@ -40,9 +40,9 @@
             });
 
             function watchList() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/watch/" + watch_id, function (data, status) {
+                $.get("${pageContext.request.contextPath}/app/portfolio/watch/" + watch_id, function (data, status) {
                     console.log(JSON.stringify(data));
-                    // 請撰寫
+                    
                     $("#myTable tbody > tr").remove();
                     $.each(data.tStocks, function (i, item) {
                         var html = '<tr>' +
@@ -83,7 +83,7 @@
             });
             
             function queryHistQuotes(symbol) {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/price/histquotes/" + symbol, function (quotes, status) {
+                $.get("${pageContext.request.contextPath}/app/portfolio/price/histquotes/" + symbol, function (quotes, status) {
                     console.log("quotes: " + quotes);
                     drawChart(symbol, quotes);
                 });
@@ -124,7 +124,8 @@
                     chartArea: {left: 50}
                 };
                 // 產生 chart 物件
-                var chart = new google.visualization.CandlestickChart(document.getElementById('container'));
+                var chart = 
+                        new google.visualization.CandlestickChart(document.getElementById('container'));
                 // 繪圖
                 chart.draw(data, options);
             }

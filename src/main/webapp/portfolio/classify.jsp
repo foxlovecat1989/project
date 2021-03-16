@@ -10,7 +10,7 @@
                 $("#myTable").on("click", "tr", function () {
                     var id = $(this).find('td').eq(0).text().trim();
                     //console.log(id);
-                    $.get("${pageContext.request.contextPath}/mvc/portfolio/classify/" + id, function (data, status) {
+                    $.get("${pageContext.request.contextPath}/app/portfolio/classify/" + id, function (data, status) {
                         console.log(JSON.stringify(data));
                         $("#myform").find("#id").val(data.id);
                         $("#myform").find("#name").val(data.name);
@@ -22,7 +22,7 @@
                     var jsonStr = JSON.stringify(jsonObj);
                     console.log(jsonStr);
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/classify/",
+                        url: "${pageContext.request.contextPath}/app/portfolio/classify/",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
                         data: jsonStr,
@@ -39,7 +39,7 @@
                     var jsonStr = JSON.stringify(jsonObj);
                     console.log(jsonStr);
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/classify/" + jsonObj.id,
+                        url: "${pageContext.request.contextPath}/app/portfolio/classify/" + jsonObj.id,
                         type: "PUT",
                         contentType: "application/json; charset=utf-8",
                         data: jsonStr,
@@ -54,7 +54,7 @@
                 $("#del").on("click", function () {
                     var id = $("#myform").find("#id").val();
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/mvc/portfolio/classify/" + id,
+                        url: "${pageContext.request.contextPath}/app/portfolio/classify/" + id,
                         type: "DELETE",
                         async: true,
                         cache: false,
@@ -70,7 +70,7 @@
             });
 
             function table_list() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/classify/", function (datas, status) {
+                $.get("${pageContext.request.contextPath}/app/portfolio/classify/", function (datas, status) {
                     console.log("Datas: " + datas);
                     $("#myTable tbody > tr").remove();
                     $.each(datas, function (i, item) {

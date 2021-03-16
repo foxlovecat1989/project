@@ -26,7 +26,7 @@ public class Classify implements Serializable {
     @Column
     private Boolean tx; // transaction
     
-    @OneToMany(cascade=CascadeType.PERSIST, mappedBy="classify", fetch = FetchType.EAGER)
+    @OneToMany(cascade={CascadeType.PERSIST}, mappedBy="classify", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("classify")
     private Set<TStock> tStocks;
 
