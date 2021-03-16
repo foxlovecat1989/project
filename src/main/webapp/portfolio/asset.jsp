@@ -23,13 +23,13 @@
                             return;
                         }
                         $.ajax({
-                            url: "${pageContext.request.contextPath}/mvc/portfolio/order/sell/" + po_id + "/" + amount,
+                            url: "${pageContext.request.contextPath}/app/portfolio/order/sell/" + po_id + "/" + amount,
                             type: "GET",
                             async: true,
                             cache: false,
                             processData: false, //To avoid making query String instead of JSON
                             success: function (resposeJsonObject) {
-                                $.get("${pageContext.request.contextPath}/mvc/portfolio/investor/" + investor_id, function (data, status) {
+                                $.get("${pageContext.request.contextPath}/app/portfolio/investor/" + investor_id, function (data, status) {
                                     update();
                                 });
                                 alert('成交回報: ' + resposeJsonObject);
@@ -53,13 +53,13 @@
                             return;
                         }
                         $.ajax({
-                            url: "${pageContext.request.contextPath}/mvc/portfolio/order/buy/" + tstock_id + "/" + amount,
+                            url: "${pageContext.request.contextPath}/app/portfolio/order/buy/" + tstock_id + "/" + amount,
                             type: "GET",
                             async: true,
                             cache: false,
                             processData: false, //To avoid making query String instead of JSON
                             success: function (resposeJsonObject) {
-                                $.get("${pageContext.request.contextPath}/mvc/portfolio/investor/" + investor_id, function (data, status) {
+                                $.get("${pageContext.request.contextPath}/app/portfolio/investor/" + investor_id, function (data, status) {
                                     update();
                                 });
                                 alert('成交回報: ' + resposeJsonObject);
@@ -73,7 +73,7 @@
             
             // 更新asset列表
             function update() {
-                $.get("${pageContext.request.contextPath}/mvc/portfolio/investor/" + investor_id, function (data, status) {
+                $.get("${pageContext.request.contextPath}/app/portfolio/investor/" + investor_id, function (data, status) {
                     //console.log(JSON.stringify(data));
                     $("#balance").text(numberFormat(data.balance));
                     table_list(data.portfolios);
@@ -133,7 +133,7 @@
                 $("#piechart_asset").empty();
                 $("#barchart_profit").empty();
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/mvc/portfolio/chart/asset/" + investor_id,
+                    url: "${pageContext.request.contextPath}/app/portfolio/chart/asset/" + investor_id,
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
                     async: true,
@@ -147,7 +147,7 @@
                     }
                 });
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/mvc/portfolio/chart/profit/" + investor_id,
+                    url: "${pageContext.request.contextPath}/app/portfolio/chart/profit/" + investor_id,
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
                     async: true,

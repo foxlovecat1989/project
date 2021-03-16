@@ -29,7 +29,10 @@ public class PriceController {
     // 範例: /histquotes/^TWII
     // 範例: /histquotes/2330.TW
     @GetMapping(value = {"/histquotes/{symbol:.+}"})
-    public List<HistoricalQuote> queryHistoricalQuotes(@PathVariable("symbol") Optional<String> symbol) {
+    public List<HistoricalQuote> queryHistoricalQuotes(
+                                        @PathVariable("symbol") 
+                                        Optional<String> symbol) {
+        // yahoofinance-api
         List<HistoricalQuote> historicalQuotes = null;
         try {
             Calendar from = Calendar.getInstance();
@@ -37,6 +40,7 @@ public class PriceController {
             from.add(Calendar.MONTH, -1); // from 1 month ago
             Stock stock = YahooFinance.get(symbol.get());
             historicalQuotes = stock.getHistory(from, to, Interval.DAILY);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
