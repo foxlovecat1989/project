@@ -4,8 +4,7 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><b>TStock</b></h1>
-            <h2 class="page-header"><b>股票、指數、匯率</b></h2>
+            <h1 class="page-header"><b>Classify</b></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -26,16 +25,12 @@
                             <input id="name" name="name" class="form-control" placeholder="Name" />
                         </div>
                         <div class="form-group">
-                            <input id="symbol" name="symbol" class="form-control" placeholder="Symbol" />
-                        </div>
-                        <div class="form-group">
-                            商品分類：<select id="classify_id" name="classify_id"></select><p /> 
+                            TX: <input id="tx" name="tx" type="checkbox">
                         </div>
 
                         <button id="add" type="button" class="btn btn-info">Add</button>
                         <button id="upt" type="button" class="btn btn-warning">Update</button>
                         <button id="del" type="button" class="btn btn-danger">Delete</button>
-
                     </form>
                 </div>
             </div>
@@ -52,10 +47,9 @@
                     <table width="100%" class="table table-striped table-bordered table-hover" id="myTable">
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>name</th>
-                                <th>symbol</th>
-                                <th>classify name</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>TX</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,57 +70,54 @@
 
 
 
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-<script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
 
 
-    $(document).ready(function () {
-
-        $('#myTable').DataTable({
-            responsive: true
-        });
+        $(document).ready(function () {
 
         $("#myTable").on("click", "tr", function () {
             var id = $(this).find('td').eq(0).text().trim();
             //console.log(id);
-            $.get("${pageContext.request.contextPath}/app/portfolio/tstock/" + id, function (data, status) {
+            $.get("${pageContext.request.contextPath}/app/portfolio/classify/" + id, function (data, status) {
                 console.log(JSON.stringify(data));
                 $("#myForm").find("#id").val(data.id);
                 $("#myForm").find("#name").val(data.name);
-                $("#myForm").find("#symbol").val(data.symbol);
-                $("#myForm").find("#classify_id").val(data.classify.id);
+                $("#myForm").find("#tx").prop('checked', data.tx);
             });
         });
+
         $("#add").on("click", function () {
             var jsonObj = $('#myForm').serializeObject();
             var jsonStr = JSON.stringify(jsonObj);
+            console.log(jsonStr);
             $.ajax({
-                url: "${pageContext.request.contextPath}/app/portfolio/tstock/",
+                url: "${pageContext.request.contextPath}/app/portfolio/classify/",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                data: jsonStr, //Stringified Json Object
-                async: true, //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
-                cache: false, //This will force requested pages not to be cached by the browser  
-                processData: false, //To avoid making query String instead of JSON
+                data: jsonStr,
+                async: true,
+                cache: false,
+                processData: false,
                 success: function (resposeJsonObject) {
-                    //alert(JSON.stringify(resposeJsonObject));
                     table_list();
                 }
             });
         });
+
         $("#upt").on("click", function () {
             var jsonObj = $('#myForm').serializeObject();
             var jsonStr = JSON.stringify(jsonObj);
+            console.log(jsonStr);
             $.ajax({
-                url: "${pageContext.request.contextPath}/app/portfolio/tstock/",
+                url: "${pageContext.request.contextPath}/app/portfolio/classify/" + jsonObj.id,
                 type: "PUT",
                 contentType: "application/json; charset=utf-8",
-                data: jsonStr, //Stringified Json Object
-                async: true, //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
-                cache: false, //This will force requested pages not to be cached by the browser  
-                processData: false, //To avoid making query String instead of JSON
+                data: jsonStr,
+                async: true,
+                cache: false,
+                processData: false,
                 success: function (resposeJsonObject) {
-                    //alert(JSON.stringify(resposeJsonObject));
                     table_list();
                 }
             });
@@ -135,60 +126,46 @@
         $("#del").on("click", function () {
             var id = $("#myForm").find("#id").val();
             $.ajax({
-                url: "${pageContext.request.contextPath}/app/portfolio/tstock/" + id,
+                url: "${pageContext.request.contextPath}/app/portfolio/classify/" + id,
                 type: "DELETE",
                 async: true,
                 cache: false,
                 processData: false,
                 success: function (resposeJsonObject) {
-                    console.log(resposeJsonObject);
-                   alert(JSON.stringify(resposeJsonObject));
-                    table_list();
+                table_list();
                 }
             });
         });
-
-        // Classify 下拉選單
-        classify_list();
 
         // 資料列表
         table_list();
     });
 
-
-    function classify_list() {
-        $.get("${pageContext.request.contextPath}/app/portfolio/classify/", function (datas, status) {
-            console.log("Datas: " + datas);
-            datas.map(function (data) {
-                $('#classify_id').append('<option value="' + data.id + '">' + data.name + '</option>');
-            });
-        });
-    }
-
-    // myform重製方法
-    function resetForm() {
-        $("#myForm").get(0).reset();
-        $("#msg").text("");
-        $("#username").attr("readonly", false);
-        $("#add").attr("disabled", false);
-        $("#upt").attr("disabled", false);
-        $("#del").attr("disabled", false);
-    }
-
-    function table_list() {
-        $.get("${pageContext.request.contextPath}/app/portfolio/tstock/", function (datas, status) {
-            console.log("Datas: " + datas);
-            $("#myTable tbody > tr").remove();
-            $.each(datas, function (i, item) {
-                var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>';
-                $('#myTable').append(String.format(html,
-                        item.id,
-                        item.name,
-                        item.symbol,
-                        item.classify.name
+            // myform重製方法
+            function resetForm() {
+                $("#myForm").get(0).reset();
+                $("#msg").text("");
+                $("#id").attr("readonly", false);
+                $("#name").attr("disabled", false);
+                $("#tx").attr("disabled", true);
+                $("#add").attr("disabled", true);
+                $("#upt").attr("disabled", false);
+                $("#del").attr("disabled", false);
+            }
+            
+            function table_list() {
+                $.get("${pageContext.request.contextPath}/app/portfolio/classify/", function (datas, status) {
+                    console.log("Datas: " + datas);
+                    $("#myTable tbody > tr").remove();
+                    $.each(datas, function (i, item) {
+                        var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>';
+                        $('#myTable').append(String.format(html,
+                                item.id,
+                                item.name,
+                                item.tx
                         ));
-            });
-        });
-    }
+                    });
+                });
+            }
 
 </script>        

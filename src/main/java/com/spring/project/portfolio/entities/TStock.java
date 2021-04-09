@@ -47,7 +47,7 @@ public class TStock implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date transactionDate;
     
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "classify_id", referencedColumnName = "id")
     @JsonIgnoreProperties("tStocks")
     private Classify classify;

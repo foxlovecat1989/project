@@ -2,6 +2,7 @@ package com.spring.project.portfolio.controller;
 
 import com.spring.project.portfolio.entities.Classify;
 import com.spring.project.portfolio.entities.TStock;
+import com.spring.project.portfolio.repository.TStockRepository;
 import com.spring.project.portfolio.service.PortfolioService;
 import java.util.Map;
 import javax.transaction.Transactional;
@@ -21,6 +22,9 @@ public class TStockController {
 
     @Autowired
     private PortfolioService service;
+    
+    @Autowired
+    private TStockRepository tStockRepository;
 
     @PostMapping(value = {"/", "/add"})
     @Transactional
