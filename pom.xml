@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.spring</groupId>
-    <artifactId>Portfolio_Project</artifactId>
+    <artifactId>Portfolio</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Portfolio_Project</name>
+    <name>Portfolio</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.version>4.3.29.RELEASE</spring.version>
+        <spring.version>5.1.0.RELEASE</spring.version>
         <junit.version>4.13.1</junit.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
+        <spring-security.version>5.1.0.RELEASE</spring-security.version>
     </properties>
     
     <dependencies>
@@ -162,19 +165,7 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>1.11.23.RELEASE</version>
         </dependency>
-        
-        <!--
-        Simple Logging Facade for Java
-        Java的簡單日誌記錄外觀（SLF4J）可作為各種日誌記錄框架（例如java.util.logging，logback，log4j）的簡單外觀，允許最終用戶在部署 時插入所需的日誌記錄框架。
-        -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.30</version>
-        </dependency>
 
-        
-        
         <!-- SimpleFlatMapper -->
         <dependency>
             <groupId>org.simpleflatmapper</groupId>
@@ -207,7 +198,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.5.3</version>
+            <version>2.12.2</version>
         </dependency>
         
         <!-- Java Faker -->
@@ -230,6 +221,51 @@
             <artifactId>YahooFinanceAPI</artifactId>
             <version>3.15.0</version>
         </dependency>
+        
+        <!-- mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.8.47</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+	
+        <!-- sitemesh -->
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        
+        <!-- spring-security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>	
+
+
         
     </dependencies>
 

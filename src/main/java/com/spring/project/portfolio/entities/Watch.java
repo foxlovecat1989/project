@@ -46,10 +46,18 @@ public class Watch implements Serializable {
     public Watch() {
     }
 
+    public Watch(String name) {
+        this.name = name;
+    }
+    
+    
+
     public Watch(String name, Investor investor) {
         this.name = name;
         this.investor = investor;
     }
+
+    
     
     public Integer getId() {
         return id;

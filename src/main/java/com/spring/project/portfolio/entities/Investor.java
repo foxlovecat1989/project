@@ -2,6 +2,7 @@ package com.spring.project.portfolio.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Investor implements Serializable {
@@ -36,6 +39,10 @@ public class Investor implements Serializable {
     @Column
     private Boolean isPassed;
     
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    
 
     @OneToMany(cascade=CascadeType.PERSIST, mappedBy="investor", fetch = FetchType.EAGER)
     //@JsonIgnoreProperties("investor")
@@ -47,6 +54,19 @@ public class Investor implements Serializable {
     
     public Investor() {
     }
+
+    public Investor(String username) {
+        this.username = username;
+    }
+
+    public Investor(String username, String password, String email, Integer balance, Date date) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.balance = balance;
+        this.date = date;
+    }
+
 
     public Investor(String username, String password, String email, Integer balance) {
         this.username = username;
@@ -124,13 +144,23 @@ public class Investor implements Serializable {
         return isPassed;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
+    
+
     public void setIsPassed(Boolean isPassed) {
         this.isPassed = isPassed;
     }
 
     @Override
     public String toString() {
-        return "Investor{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", balance=" + balance + ", code=" + code + ", isPassed=" + isPassed + ", portfolios=" + portfolios + ", watchs=" + watchs + '}';
+        return "Investor{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", balance=" + balance + ", code=" + code + ", isPassed=" + isPassed + ", date=" + date + ", portfolios=" + portfolios + ", watchs=" + watchs + '}';
     }
 
     
