@@ -55,6 +55,12 @@ public class TStock implements Serializable {
     public TStock() {
     }
 
+    public TStock(String name) {
+        this.name = name;
+    }
+    
+    
+
     public TStock(String symbol, String name, Classify classify) {
         this.symbol = symbol;
         this.name = name;

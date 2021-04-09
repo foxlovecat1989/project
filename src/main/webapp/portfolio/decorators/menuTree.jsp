@@ -15,8 +15,36 @@
         </div>
         <!-- /input-group -->
     </li>
+    <!-- href list -->
     <li>
-        <a href="<c:url value='/portfolio/views/pages/investor.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> Investor</a>
+        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Admin<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li>
+                 <a href="<c:url value='/portfolio/views/pages/investor.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> Investor</a>
+            </li>
+            <li>
+                 <a href="<c:url value='/portfolio/views/pages/tstock.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> Stock</a>
+            </li>
+            <li>
+                <a href="#">Third Level <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level">
+                    <li>
+                        <a href="#">Third Level Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Third Level Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Third Level Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Third Level Item</a>
+                    </li>
+                </ul>
+                <!-- /.nav-third-level -->
+            </li>
+        </ul>
+        <!-- /.nav-second-level -->
     </li>
     <li>
         <a href="<c:url value='/portfolio/views/demo/index.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
@@ -63,37 +91,7 @@
         </ul>
         <!-- /.nav-second-level -->
     </li>
-    <!-- href list -->
-    <li>
-        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-            <li>
-                <a href="#">Second Level Item</a>
-            </li>
-            <li>
-                <a href="#">Second Level Item</a>
-            </li>
-            <li>
-                <a href="#">Third Level <span class="fa arrow"></span></a>
-                <ul class="nav nav-third-level">
-                    <li>
-                        <a href="#">Third Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Third Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Third Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Third Level Item</a>
-                    </li>
-                </ul>
-                <!-- /.nav-third-level -->
-            </li>
-        </ul>
-        <!-- /.nav-second-level -->
-    </li>
+    
     <li>
         <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
