@@ -22,9 +22,6 @@ public class TStockController {
 
     @Autowired
     private PortfolioService service;
-    
-    @Autowired
-    private TStockRepository tStockRepository;
 
     @PostMapping(value = {"/", "/add"})
     @Transactional

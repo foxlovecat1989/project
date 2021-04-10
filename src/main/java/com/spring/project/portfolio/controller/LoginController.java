@@ -25,7 +25,7 @@ public class LoginController {
         if(investor != null && investor.getPassword().equals(password.get())) {
             session.setAttribute("investor", investor);
             session.setAttribute("watch_id", investor.getWatchs().iterator().next().getId());
-            return "redirect:/portfolio/index.jsp";
+            return "redirect:/portfolio/views/pages/investor.jsp";
         }
         return logout(session);
     }
@@ -33,6 +33,6 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/portfolio/login.jsp";
+        return "redirect:/portfolio/views/pages/login.jsp";
     }
 }

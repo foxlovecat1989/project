@@ -25,6 +25,9 @@
             <li>
                  <a href="<c:url value='/portfolio/views/pages/tstock.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> Stock</a>
             </li>
+             <li>
+                 <a href="<c:url value='/portfolio/views/pages/classify.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> Classify</a>
+            </li>
             <li>
                 <a href="#">Third Level <span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level">
