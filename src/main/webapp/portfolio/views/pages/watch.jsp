@@ -1,10 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-${sessionScope.watch_id}
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><b>WatchList</b></h1>
+            <h1 class="page-header"><b>我的觀察股, watch_id: ${sessionScope.watch_id}</b></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -101,11 +100,13 @@ ${sessionScope.watch_id}
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
     var watch = null;
+    
+    var watch_id = ${sessionScope.watch_id};
 
     $(document).ready(function () {
 
         $("#upt").on("click", function () {
-            var jsonObj = $('#myform').serializeObject();
+            var jsonObj = $('#myForm').serializeObject();
             var jsonStr = JSON.stringify(jsonObj);
             $.ajax({
                 url: "${pageContext.request.contextPath}/app/portfolio/watch/" + watch_id,

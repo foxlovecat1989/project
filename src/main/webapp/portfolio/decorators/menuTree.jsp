@@ -15,7 +15,7 @@
         </div>
         <!-- /input-group -->
     </li>
-    <!-- href list -->
+    <!-- Admin href list -->
     <li>
         <a href="#"><i class="fa fa-sitemap fa-fw"></i> Admin<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
@@ -49,6 +49,36 @@
         </ul>
         <!-- /.nav-second-level -->
     </li>
+    
+    <!-- Investor href list -->
+    <li>
+        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Investor<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li>
+                 <a href="<c:url value='/portfolio/views/pages/watch.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> 觀察清單</a>
+            </li>
+            <li>
+                <a href="#">Third Level <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level">
+                    <li>
+                        <a href="#">Third Level Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Third Level Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Third Level Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Third Level Item</a>
+                    </li>
+                </ul>
+                <!-- /.nav-third-level -->
+            </li>
+        </ul>
+        <!-- /.nav-second-level -->
+        
+        
     <li>
         <a href="<c:url value='/portfolio/views/demo/index.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
     </li>
