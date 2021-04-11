@@ -46,6 +46,14 @@ public class Portfolio implements Serializable {
     public Portfolio() {
     }
 
+    public Portfolio(Double cost, Integer amount, TStock tStock) {
+        this.cost = cost;
+        this.amount = amount;
+        this.tStock = tStock;
+    }
+
+    
+
     public Portfolio(Double cost, Integer amount, Investor investor, TStock tStock) {
         this.cost = cost;
         this.amount = amount;

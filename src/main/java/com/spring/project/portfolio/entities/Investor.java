@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -43,6 +44,8 @@ public class Investor implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date date;
     
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Role role; 
 
     @OneToMany(cascade=CascadeType.PERSIST, mappedBy="investor", fetch = FetchType.EAGER)
     //@JsonIgnoreProperties("investor")
@@ -158,11 +161,18 @@ public class Investor implements Serializable {
         this.isPassed = isPassed;
     }
 
-    @Override
-    public String toString() {
-        return "Investor{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", balance=" + balance + ", code=" + code + ", isPassed=" + isPassed + ", date=" + date + ", portfolios=" + portfolios + ", watchs=" + watchs + '}';
+    public Role getRole() {
+        return role;
     }
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Investor{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", balance=" + balance + ", code=" + code + ", isPassed=" + isPassed + ", date=" + date + ", role=" + role + ", portfolios=" + portfolios + ", watchs=" + watchs + '}';
+    }
     
     
 }

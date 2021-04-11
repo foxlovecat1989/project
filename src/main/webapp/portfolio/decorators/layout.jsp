@@ -73,7 +73,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<c:url value='/portfolio/views/demo/index.jsp'/>">${sessionScope.investor.username}</a>
+                    <a class="navbar-brand" href="<c:url value='#'/>"><b>Welcome, ${sessionScope.investor.username}</a>
                 </div>
                 <!-- /.navbar-header -->
 

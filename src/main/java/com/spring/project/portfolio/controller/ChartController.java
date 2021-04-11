@@ -1,5 +1,6 @@
 package com.spring.project.portfolio.controller;
 
+
 import com.spring.project.portfolio.repository.AssetRepository;
 import com.spring.project.portfolio.repository.ProfitRepository;
 import java.util.List;
@@ -19,15 +20,13 @@ public class ChartController {
     @Autowired
     private ProfitRepository profitRepository;
     
-    @GetMapping("/asset/{invid}")
-    public List asset(@PathVariable("invid") Optional<Integer> id) {
-        return assetRepository.findById(id.get());
+    @GetMapping(value = {"/asset/{invid}"})
+    public List asset(@PathVariable("invid") Optional<Integer> invid) {
+        return assetRepository.findByInvid(invid.get());
     }
     
-    @GetMapping("/profit/{invid}")
-    public List profit(@PathVariable("invid") Optional<Integer> id) {
-        return profitRepository.findById(id.get());
+    @GetMapping(value = {"/profit/{invid}"})
+    public List profit(@PathVariable("invid") Optional<Integer> invid) {
+        return profitRepository.findByInvId(invid.get());
     }
-    
-    
 }
