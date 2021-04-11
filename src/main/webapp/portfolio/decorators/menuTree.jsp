@@ -50,12 +50,25 @@
         <!-- /.nav-second-level -->
     </li>
     
+    
     <!-- Investor href list -->
     <li>
         <a href="#"><i class="fa fa-sitemap fa-fw"></i> Investor<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li>
+                 <a href="<c:url value='/portfolio/views/pages/asset.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> 資產列表</a>
+            </li>
+            <li>
                  <a href="<c:url value='/portfolio/views/pages/watch.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> 觀察清單</a>
+            </li>
+            <li>
+                 <a href="<c:url value='/portfolio/views/pages/watchlist.jsp'/>"><i class="fa fa-dashboard fa-fw"></i> 觀察列表</a>
+            </li>
+            <li>
+                 <a href="<c:url value='/app/portfolio/price/refresh'/>"><i class="fa fa-dashboard fa-fw"></i> Refresh Price</a>
+            </li>
+            <li>
+                 <a href="<c:url value='/app/portfolio/price/histquotes/^TWII'/>"><i class="fa fa-dashboard fa-fw"></i> History Price</a>
             </li>
             <li>
                 <a href="#">Third Level <span class="fa arrow"></span></a>
