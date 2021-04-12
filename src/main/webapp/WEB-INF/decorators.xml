@@ -2,8 +2,8 @@
 
 <decorators defaultdir="/portfolio/decorators">
 	<excludes>
-		<pattern>/portfolio/views/pages/login.jsp</pattern>
-                <pattern>index.html</pattern>
+		<pattern>/login*</pattern>
+                <pattern>/portfolio/views/pages/login.jsp</pattern>
 	</excludes>
 	<decorator name="layout" page="layout.jsp">
 		<pattern>*</pattern>
