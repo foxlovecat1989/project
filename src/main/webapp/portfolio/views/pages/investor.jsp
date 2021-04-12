@@ -60,6 +60,7 @@
                                 <th>Balance</th>
                                 <th>Code</th>
                                 <th>Enabled</th>
+                                <th>Roles</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -196,7 +197,7 @@
             // console.log("Datas: " + datas);
             $("#myTable tbody > tr").remove(); // 將之前的資料清空
             $.each(datas, function (i, item) {  // 將 datas 取出格式化成表格欄位
-                var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>';
+                var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td></tr>';
                 $('#myTable').append(String.format(html,
                         item.id,
                         item.username,
@@ -204,8 +205,9 @@
                         item.email,
                         item.balance,
                         item.code,
-                        item.enabled
-                        ));
+                        item.enabled,
+                        item.roles
+                ));            
             });
         });
     }

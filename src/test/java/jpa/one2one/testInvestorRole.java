@@ -49,7 +49,8 @@ public class testInvestorRole extends JPATemplate {
         Investor investor4 = new Investor("Delete", "delete", "Delete@gmail.com", 500000, Boolean.TRUE, new Date());
         investor4.getRoles().add(roleOfMEMBER);
         
-
+        entityManager.persist(roleOfUser);
+        entityManager.persist(roleOfMEMBER);
         entityManager.persist(investor1);
         entityManager.persist(investor2);
         entityManager.persist(investor3);
