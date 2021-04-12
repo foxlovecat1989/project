@@ -1,9 +1,12 @@
 package com.spring.project.portfolio.controller;
 
+import com.spring.project.portfolio.entities.Classify;
 import com.spring.project.portfolio.entities.Investor;
+import com.spring.project.portfolio.entities.InvestorRole;
 import com.spring.project.portfolio.entities.Watch;
 import com.spring.project.portfolio.service.EmailService;
 import com.spring.project.portfolio.service.PortfolioService;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -45,12 +48,15 @@ public class InvestorController {
     // 新增 investor - 註冊帳號 
     @PostMapping(value = {"/", "/add"})
     public Investor addInvestor(@RequestBody Map<String, String> jsonMap) {
+        InvestorRole investorRole = portfolioService.getInvestorRoleRepository().findOne(Integer.parseInt(jsonMap.get("investorRole_id")));
         Investor investor = new Investor();
         investor.setUsername(jsonMap.get("username"));
         investor.setPassword(jsonMap.get("password"));
         investor.setEmail(jsonMap.get("email"));
         investor.setBalance(Integer.parseInt(jsonMap.get("balance")));
-        investor.setEnabled(Boolean.FALSE);
+        investor.setEnabled(Boolean.TRUE);
+        investor.setInvestorRole(investorRole);
+        investor.setDate(new Date());
         
         // 設定認證碼 - 使用 the object of investor's hashCode 轉 16進位 作為 Code
         investor.setCode(Integer.toHexString(investor.hashCode()));
@@ -72,6 +78,8 @@ public class InvestorController {
     @Transactional
     public Boolean updateInvestor(@PathVariable("id") Optional<Integer> id, 
                           @RequestBody Map<String, String> jsonMap) {
+        // InvestorRole investorRole = portfolioService.getInvestorRoleRepository().findOne(Integer.parseInt(jsonMap.get("investorRole_id")));
+        System.out.println(Integer.parseInt(jsonMap.get("investorRole_id")));
         // 判斷是否有此 id?
         if(!id.isPresent()) {
             return false;
@@ -86,7 +94,9 @@ public class InvestorController {
                 jsonMap.get("username"), 
                 jsonMap.get("password"), 
                 jsonMap.get("email"), 
-                Integer.parseInt(jsonMap.get("balance")));
+                Integer.parseInt(jsonMap.get("balance")),
+                Integer.parseInt(jsonMap.get("investorRole_id"))
+        );
         return true;
     }
     

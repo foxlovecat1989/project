@@ -17,17 +17,27 @@ public class InvestorRole {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column
-    private String roleType;
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
     public InvestorRole() {
     }
 
-    public InvestorRole(String roleType) {
+    public InvestorRole(RoleType roleType) {
+        this.roleType = roleType;
+    }
+    
+    
+
+    public RoleType getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(RoleType roleType) {
         this.roleType = roleType;
     }
 
-
+ 
     public Integer getId() {
         return id;
     }
@@ -36,18 +46,8 @@ public class InvestorRole {
         this.id = id;
     }
 
-    public String getRoleType() {
-        return roleType;
-    }
-
-    public void setRoleType(String roleType) {
-        this.roleType = roleType;
-    }
-
     @Override
     public String toString() {
         return "InvestorRole{" + "id=" + id + ", roleType=" + roleType + '}';
     }
-
-    
 }

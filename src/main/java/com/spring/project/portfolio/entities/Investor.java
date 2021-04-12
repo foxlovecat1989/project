@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -46,8 +47,10 @@ public class Investor implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private InvestorRole role;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "investorRole_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("investorRole")
+    private InvestorRole investorRole;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "investor", fetch = FetchType.EAGER)
     //@JsonIgnoreProperties("investor")
@@ -162,13 +165,14 @@ public class Investor implements Serializable {
         this.date = date;
     }
 
-    public InvestorRole getRole() {
-        return role;
+    public InvestorRole getInvestorRole() {
+        return investorRole;
     }
 
-    public void setRole(InvestorRole role) {
-        this.role = role;
+    public void setInvestorRole(InvestorRole investorRole) {
+        this.investorRole = investorRole;
     }
+    
 
     public Boolean getEnabled() {
         return enabled;
@@ -180,11 +184,8 @@ public class Investor implements Serializable {
 
     @Override
     public String toString() {
-        return "Investor{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", balance=" + balance + ", code=" + code + ", enabled=" + enabled + ", date=" + date + ", role=" + role + ", portfolios=" + portfolios + ", watchs=" + watchs + '}';
+        return "Investor{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", balance=" + balance + ", code=" + code + ", enabled=" + enabled + ", date=" + date + ", investorRole=" + investorRole + ", portfolios=" + portfolios + ", watchs=" + watchs + '}';
     }
-
-
-    
     
 
 }

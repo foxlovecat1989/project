@@ -26,7 +26,8 @@ public interface InvestorRepository extends JpaRepository<Investor, Integer>{
                     + "SET username=?2, "
                     + "password=?3, "
                     + "email=?4, "
-                    + "balance=?5 "
+                    + "balance=?5, "
+                    + "investorRole_id=?6 "
                     + "WHERE id=?1", 
             nativeQuery = true)
     
@@ -35,5 +36,8 @@ public interface InvestorRepository extends JpaRepository<Investor, Integer>{
             @Param("username") String username, 
             @Param("password") String password, 
             @Param("email") String email, 
-            @Param("balance") Integer balance);
+            @Param("balance") Integer balance,
+            @Param("investorRole_id") Integer investorRole_id
+            
+    );
 }
