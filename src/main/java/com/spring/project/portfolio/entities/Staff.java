@@ -22,7 +22,7 @@ public class Staff implements Serializable {
     @JoinTable(name = "STAFF_ROLES",
             joinColumns = @JoinColumn(name = "STAFF_ID", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "id"))
-    private Set<Role> roles;
+    private Set<InvestorRole> roles;
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("staffs")
@@ -56,11 +56,11 @@ public class Staff implements Serializable {
         this.name = name;
     }
 
-    public Set<Role> getRoles() {
+    public Set<InvestorRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<InvestorRole> roles) {
         this.roles = roles;
     }
 

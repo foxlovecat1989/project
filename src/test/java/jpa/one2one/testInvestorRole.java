@@ -1,14 +1,10 @@
 package jpa.one2one;
 
 import com.spring.project.portfolio.entities.Investor;
-import com.spring.project.portfolio.entities.Role;
-import com.spring.project.portfolio.entities.RoleType;
-import java.util.Arrays;
+import com.spring.project.portfolio.entities.InvestorRole;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import jpa.JPATemplate;
@@ -25,9 +21,9 @@ public class testInvestorRole extends JPATemplate {
         List<Investor> investors = findAll();
         investors.stream().forEach(System.out::println);
         // U - update
-        updateRoleById(Optional.of(1), RoleType.MEMBER);
+        updateRoleById(Optional.of(1), "Member");
         Investor investor = findOneById(Optional.of(1));
-        Assert.assertEquals(RoleType.MEMBER, investor.getRoles().iterator().next().getRoleType());
+        Assert.assertEquals("Member", investor.getRole().getRoleType());
 
         // D - delete
         deleteById(Optional.of(4));
@@ -37,20 +33,20 @@ public class testInvestorRole extends JPATemplate {
 
     public void create() {
         
-        Role roleOfUser = new Role(RoleType.USER);
-        Role roleOfMEMBER = new Role(RoleType.MEMBER);
+        InvestorRole roleOfUser = new InvestorRole("User");
+        InvestorRole roleOfMember = new InvestorRole("Member");
 
         Investor investor1 = new Investor("Amber", "amber", "Amber@gmail.com", 300000, Boolean.TRUE, new Date());
-        investor1.getRoles().add(roleOfUser);
+        investor1.setRole(roleOfUser);
         Investor investor2 = new Investor("Betty", "betty", "Betty@gmail.com", 1000000, Boolean.TRUE, new Date());
-        investor2.getRoles().add(roleOfUser);
+        investor2.setRole(roleOfMember);
         Investor investor3 = new Investor("Cathy", "cathy", "Cathy@gmail.com", 100000, Boolean.TRUE, new Date());
-        investor3.getRoles().add(roleOfMEMBER);
+        investor3.setRole(roleOfUser);
         Investor investor4 = new Investor("Delete", "delete", "Delete@gmail.com", 500000, Boolean.TRUE, new Date());
-        investor4.getRoles().add(roleOfMEMBER);
+        investor4.setRole(roleOfMember);
         
         entityManager.persist(roleOfUser);
-        entityManager.persist(roleOfMEMBER);
+        entityManager.persist(roleOfMember);
         entityManager.persist(investor1);
         entityManager.persist(investor2);
         entityManager.persist(investor3);
@@ -62,7 +58,7 @@ public class testInvestorRole extends JPATemplate {
 
     public List<Investor> findAll() {
         TypedQuery<Investor> query
-                = entityManager.createQuery("select i from Investor i INNER JOIN FETCH i.roles", Investor.class);
+                = entityManager.createQuery("select i from Investor i INNER JOIN FETCH i.role", Investor.class);
         List<Investor> investors = query.getResultList();
 
         return investors;
@@ -72,14 +68,12 @@ public class testInvestorRole extends JPATemplate {
         return entityManager.find(Investor.class, id.get());
     }
 
-    public void updateRoleById(Optional<Integer> id, RoleType roleType) {
+    public void updateRoleById(Optional<Integer> id, String roleType) {
         Investor investor = entityManager.find(Investor.class, id.get());
-        Query query = entityManager.createQuery("Select r from Role r WHERE r.roleType = ?1");
+        Query query = entityManager.createQuery("Select ir from InvestorRole ir WHERE ir.roleType = ?1");
         query.setParameter(1, roleType);
-        Role queryRole = (Role)query.getSingleResult();
-        Set<Role> roles = new HashSet<>();
-        roles.add(queryRole);
-        investor.setRoles(roles);
+        InvestorRole queryRole = (InvestorRole)query.getSingleResult();
+        investor.setRole(queryRole);
         entityManager.persist(investor);
         entityManager.flush();
     }

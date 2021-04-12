@@ -1,7 +1,6 @@
 package jpa.singleTable;
 
-import com.spring.project.portfolio.entities.Role;
-import com.spring.project.portfolio.entities.RoleType;
+import com.spring.project.portfolio.entities.InvestorRole;
 import jpa.JPATemplate;
 import org.junit.Test;
 
@@ -10,10 +9,10 @@ public class testRole extends JPATemplate {
     @Test
     public void crate(){
         
-        Role roleOfStaff = new Role(RoleType.STAFF);
-        Role roleOfAdmin = new Role(RoleType.ADMIN);
-        Role roleOfMember = new Role(RoleType.MEMBER);
-        Role roleOfUser = new Role(RoleType.USER);
+        InvestorRole roleOfStaff = new InvestorRole("Staff");
+        InvestorRole roleOfAdmin = new InvestorRole("Admin");
+        InvestorRole roleOfMember = new InvestorRole("Member");
+        InvestorRole roleOfUser = new InvestorRole("User");
         
         entityManager.persist(roleOfStaff);
         entityManager.persist(roleOfAdmin);

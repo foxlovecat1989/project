@@ -7,9 +7,14 @@ import com.spring.project.portfolio.repository.TStockRepository;
 import com.spring.project.portfolio.repository.WatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.spring.project.portfolio.repository.InvestorRoleRepository;
 
 @Service
 public class PortfolioService {
+    
+    @Autowired
+    private InvestorRoleRepository investorRoleRepository;
+    
     @Autowired
     private ClassifyRepository classifyRepository;
     
@@ -44,6 +49,12 @@ public class PortfolioService {
     public WatchRepository getWatchRepository() {
         return watchRepository;
     }
+
+    public InvestorRoleRepository getInvestorRoleRepository() {
+        return investorRoleRepository;
+    }
+
+    
     
     
 }

@@ -1,5 +1,6 @@
 package com.spring.project.portfolio.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,23 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ROLE")
-public class Role {
+@Table(name = "InvestorRole")
+public class InvestorRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    @Column
+    private String roleType;
 
-    public Role() {
+    public InvestorRole() {
     }
 
-    public Role(RoleType roleType) {
+    public InvestorRole(String roleType) {
         this.roleType = roleType;
     }
-    
+
+
     public Integer getId() {
         return id;
     }
@@ -34,17 +36,18 @@ public class Role {
         this.id = id;
     }
 
-    public RoleType getRoleType() {
+    public String getRoleType() {
         return roleType;
     }
 
-    public void setRoleType(RoleType roleType) {
+    public void setRoleType(String roleType) {
         this.roleType = roleType;
     }
 
     @Override
     public String toString() {
-        return "Role{" + "id=" + id + ", roleType=" + roleType + '}';
+        return "InvestorRole{" + "id=" + id + ", roleType=" + roleType + '}';
     }
+
     
 }

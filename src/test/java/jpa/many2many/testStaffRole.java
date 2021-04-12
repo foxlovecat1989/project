@@ -1,6 +1,6 @@
 package jpa.many2many;
 
-import com.spring.project.portfolio.entities.Role;
+import com.spring.project.portfolio.entities.InvestorRole;
 import com.spring.project.portfolio.entities.Staff;
 import java.util.HashSet;
 import java.util.LinkedList;

@@ -33,6 +33,9 @@
                         <div class="form-group">
                             <input id="balance" name="balance" class="form-control" placeholder="Balance" />
                         </div>
+                        <div class="form-group">
+                            會員級別：<select id="role_id" name="role_id"></select><p /> 
+                        </div>
 
                         <button id="add" type="button" class="btn btn-info">Add</button>
                         <button id="upt" type="button" class="btn btn-warning">Update</button>
@@ -178,6 +181,9 @@
                 }
             });
         });
+        
+        // role 下拉選單
+        role_list();
 
         // 資料列表
         table_list();
@@ -206,8 +212,17 @@
                         item.balance,
                         item.code,
                         item.enabled,
-                        item.roles
-                ));            
+                        item.role.roleType
+                )); 
+            });
+        });
+    }
+    
+    function role_list() {
+        $.get("${pageContext.request.contextPath}/app/portfolio/investorRole/", function (datas, status) {
+            console.log("Datas: " + datas);
+            datas.map(function (data) {
+                $('#role_id').append('<option value="' + data.id + '">' + data.roleType + '</option>');
             });
         });
     }

@@ -182,6 +182,7 @@
                     watch = data; // 設定 watch 變數資料
                     
                     $("#myTable1 tbody > tr").remove();
+                    
                     $.each(watch.tStocks, function (i, item) {
                         var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td tstock_id="{4}">{5}</td></tr>';
                         delbtn_html = '<button type="button" class="btn btn-info">Remove</button>';

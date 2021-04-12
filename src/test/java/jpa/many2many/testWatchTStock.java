@@ -1,6 +1,6 @@
 package jpa.many2many;
 
-import com.spring.project.portfolio.entities.Role;
+import com.spring.project.portfolio.entities.InvestorRole;
 import com.spring.project.portfolio.entities.Staff;
 import com.spring.project.portfolio.entities.TStock;
 import com.spring.project.portfolio.entities.Watch;
@@ -71,11 +71,11 @@ public class testWatchTStock extends JPATemplate {
 
     public void updateRolesById(Optional<Integer> id, String... roles) {
         Staff staff = entityManager.find(Staff.class, id.get());
-        Set<Role> modifiedRoles = new HashSet<>();
+        Set<InvestorRole> modifiedRoles = new HashSet<>();
         for (String role : roles) {
-            Query query = entityManager.createQuery("select r from Role r where r.name = ?1", Role.class);
+            Query query = entityManager.createQuery("select r from Role r where r.name = ?1", InvestorRole.class);
             query.setParameter(1, role);
-            Role queryRole = (Role) query.getSingleResult();
+            InvestorRole queryRole = (InvestorRole) query.getSingleResult();
             modifiedRoles.add(queryRole);
         }
 
