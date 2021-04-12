@@ -3,6 +3,7 @@ package com.spring.project.portfolio.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,8 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,40 +22,40 @@ public class Investor implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
-    
+
     @Column
     private String username;
-    
+
     @Column
     private String password;
-    
+
     @Column
     private String email;
-    
+
     @Column
     private Integer balance;
-    
+
     @Column
     private String code;
-    
+
     @Column
-    private Boolean isPassed;
-    
+    private Boolean enabled;
+
     @Column
     @Temporal(TemporalType.DATE)
     private Date date;
-    
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Role role; 
 
-    @OneToMany(cascade=CascadeType.PERSIST, mappedBy="investor", fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "investor", fetch = FetchType.EAGER)
     //@JsonIgnoreProperties("investor")
     private Set<Portfolio> portfolios;
-    
-    @OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy="investor", fetch = FetchType.EAGER)
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "investor", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("investor")
     private Set<Watch> watchs;
-    
+
     public Investor() {
     }
 
@@ -70,15 +71,24 @@ public class Investor implements Serializable {
         this.date = date;
     }
 
-
+    public Investor(String username, String password, String email, Integer balance, Boolean enabled, Date date) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.balance = balance;
+        this.enabled = enabled;
+        this.date = date;
+    }
+    
+ 
     public Investor(String username, String password, String email, Integer balance) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.balance = balance;
-        isPassed = true;
+        enabled = true;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -143,10 +153,6 @@ public class Investor implements Serializable {
         this.code = code;
     }
 
-    public Boolean getIsPassed() {
-        return isPassed;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -154,25 +160,30 @@ public class Investor implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-    
-    
 
-    public void setIsPassed(Boolean isPassed) {
-        this.isPassed = isPassed;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public Role getRole() {
-        return role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
     public String toString() {
-        return "Investor{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", balance=" + balance + ", code=" + code + ", isPassed=" + isPassed + ", date=" + date + ", role=" + role + ", portfolios=" + portfolios + ", watchs=" + watchs + '}';
+        return "Investor{" + "id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", balance=" + balance + ", code=" + code + ", enabled=" + enabled + ", date=" + date + ", roles=" + roles + ", portfolios=" + portfolios + ", watchs=" + watchs + '}';
     }
+
     
-    
+
 }

@@ -50,7 +50,7 @@ public class InvestorController {
         investor.setPassword(jsonMap.get("password"));
         investor.setEmail(jsonMap.get("email"));
         investor.setBalance(Integer.parseInt(jsonMap.get("balance")));
-        investor.setIsPassed(Boolean.FALSE);
+        investor.setEnabled(Boolean.FALSE);
         
         // 設定認證碼 - 使用 the object of investor's hashCode 轉 16進位 作為 Code
         investor.setCode(Integer.toHexString(investor.hashCode()));

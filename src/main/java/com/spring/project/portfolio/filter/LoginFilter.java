@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = {"/portfolio/*"}, dispatcherTypes = {DispatcherType.REQUEST})
+//@WebFilter(urlPatterns = {"/portfolio/*"}, dispatcherTypes = {DispatcherType.REQUEST})
 public class LoginFilter extends HttpFilter {
 
     @Override

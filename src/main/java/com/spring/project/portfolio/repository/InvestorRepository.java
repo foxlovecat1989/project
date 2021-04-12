@@ -11,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository(value = "investorRepository")
 public interface InvestorRepository extends JpaRepository<Investor, Integer>{
    
-    @Query(value = "Select i From Investor i Where i.isPassed='true' And i.username=?1")
+    @Query(value = "Select i From Investor i Where i.enabled='true' And i.username=?1")
     public Investor getInvestor(@Param("username") String username);
     
     @Transactional
     @Modifying
-    @Query(value = "UPDATE Investor SET isPassed=?2 WHERE id=?1", nativeQuery = true)
-    public void updateIsPassed(@Param("id") Integer id, @Param("isPassed") Boolean pass);
+    @Query(value = "UPDATE Investor SET enabled=?2 WHERE id=?1", nativeQuery = true)
+    public void updateEnabled(@Param("id") Integer id, @Param("enabled") Boolean enabled);
     
     @Transactional
     @Modifying

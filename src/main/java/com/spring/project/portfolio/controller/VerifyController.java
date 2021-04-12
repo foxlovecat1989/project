@@ -28,7 +28,7 @@ public class VerifyController {
         // 判斷 investor 是否為 Null & code是否正確?
         if(investor != null && investor.getCode().equals(code.get())){
             // 正確則, update 資料庫的 isPassed = true
-            portfolioService.getInvestorRepository().updateIsPassed(id.get(), Boolean.TRUE);
+            portfolioService.getInvestorRepository().updateEnabled(id.get(), Boolean.TRUE);
             message = "SUCCESS";
         }
         // 設定 message attribute
